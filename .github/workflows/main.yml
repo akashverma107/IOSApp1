@@ -1,0 +1,11 @@
+name: Build IPA
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: xcodebuild archive -project YourProject.xcodeproj -scheme YourScheme -archivePath build/YourApp.xcarchive
+      - name: Export
+        run: xcodebuild -exportArchive -archivePath build/YourApp.xcarchive -exportPath build/ipa -exportOptionsPlist ExportOptions.plist
